@@ -13,3 +13,13 @@ questions:
   required: true
   type: string
   label: Path to Models within Container
+- variable: model_base_path
+  default: ""
+  required: true
+  type: string
+  label: Path to Models within Container
+- variable: model_name
+  default: ""
+  required: true
+  type: string
+  label: Model Name
