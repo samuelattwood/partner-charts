@@ -1,0 +1,15 @@
+questions:
+- variable: image.repository
+  default: intel/intel-optimized-tensorflow-serving
+  type: string
+  label: TensorFlow Serving Image
+- variable: replicaCount
+  default: 1
+  required: true
+  type: int
+  label: Replica Count
+- variable: model_base_path
+  default: "/models"
+  required: true
+  type: string
+  label: Path to Models within Container

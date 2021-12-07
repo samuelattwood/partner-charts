@@ -1,0 +1,40 @@
+--- charts-original/templates/deployment.yaml
++++ charts/templates/deployment.yaml
+@@ -27,6 +27,22 @@
+       serviceAccountName: {{ include "tensorflow-serving.serviceAccountName" . }}
+       securityContext:
+         {{- toYaml .Values.podSecurityContext | nindent 8 }}
++      initContainers:
++        - name: init-resnet
++          image: busybox
++          command:
++            - /bin/sh
++            - -c
++            - |
++              #!/bin/sh
++              cd /models
++              mkdir resnet
++              /bin/wget http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz
++              /bin/tar -xvf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz -C resnet --strip-components 2
++              rm -f resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz
++          volumeMounts:
++            - name: models
++              mountPath: /models
+       containers:
+         - name: {{ .Chart.Name }}
+           securityContext:
+@@ -54,12 +70,10 @@
+             {{- toYaml .Values.resources | nindent 12 }}
+           volumeMounts:
+             - name: models
+-              mountPath: {{ .Values.models_path }}
++              mountPath: /models
+       volumes:
+         - name: models
+-          hostPath:
+-            path: {{ .Values.models_path }}
+-
++          emptyDir: {}
+       {{- with .Values.nodeSelector }}
+       nodeSelector:
+         {{- toYaml . | nindent 8 }}
