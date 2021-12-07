@@ -1,0 +1,17 @@
+questions:
+- variable: image.repository
+  type: string
+  label: TensorFlow Serving Image
+  required: true
+- variable: model_base_path
+  type: string
+  label: Path to Models within Container
+  required: true
+- variable: model_name
+  type: string
+  label: Model Name
+  required: true
+- variable: replicaCount
+  type: int
+  label: Replica Count
+  required: true

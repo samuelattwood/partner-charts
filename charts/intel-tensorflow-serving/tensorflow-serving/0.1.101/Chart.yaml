@@ -1,0 +1,12 @@
+annotations:
+  catalog.cattle.io/certified: partner
+  catalog.cattle.io/display-name: Intel oneDNN TensorFlow Serving
+  catalog.cattle.io/release-name: intel-tensorflow-serving
+apiVersion: v2
+appVersion: 2.3.0
+description: A Helm chart for Kubernetes
+icon: https://www.tensorflow.org/resources/images/tf-logo-card-16x9.png
+kubeVersion: '>= 1.20.0-0'
+name: tensorflow-serving
+type: application
+version: 0.1.101

@@ -2338,6 +2338,22 @@ entries:
       catalog.cattle.io/release-name: intel-tensorflow-serving
     apiVersion: v2
     appVersion: 2.3.0
+    created: "2021-12-07T03:52:35.975056-05:00"
+    description: A Helm chart for Kubernetes
+    digest: e393989333d1d0073a3c690fbf8627909808cf59757bf982cd45f59bae1df663
+    icon: https://www.tensorflow.org/resources/images/tf-logo-card-16x9.png
+    kubeVersion: '>= 1.20.0-0'
+    name: tensorflow-serving
+    type: application
+    urls:
+    - assets/intel-tensorflow-serving/tensorflow-serving-0.1.101.tgz
+    version: 0.1.101
+  - annotations:
+      catalog.cattle.io/certified: partner
+      catalog.cattle.io/display-name: Intel oneDNN TensorFlow Serving
+      catalog.cattle.io/release-name: intel-tensorflow-serving
+    apiVersion: v2
+    appVersion: 2.3.0
     created: "2021-12-07T03:21:59.114577-05:00"
     description: A Helm chart for Kubernetes
     digest: 92e394faa64d4bbf3532e23415e042278f660498fbd57b55de0297444a2790dd
