@@ -1,0 +1,12 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -81,7 +81,7 @@
+ 
+ affinity: {}
+ 
+-model_base_path: ""
+-model_name: ""
++model_base_path: "/models"
++model_name: "resnet"
+ models_path: ""
+ model_port: 8500
