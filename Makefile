@@ -1,10 +1,13 @@
 pull-scripts:
 	./scripts/pull-scripts
 
-TARGETS := prepare patch charts clean validate template
+TARGETS := prepare patch clean
 
 $(TARGETS):
 	@./scripts/pull-scripts
-	@./bin/charts-build-scripts $@
+	@./bin/partner-charts-ci $@
 
-.PHONY: $(TARGETS)
+charts:
+	@./bin/partner-charts-ci stage
+
+.PHONY: $(TARGETS) charts

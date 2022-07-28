@@ -1,18 +1,14 @@
 #!/bin/bash
 set -e
 
+VERSION=v0.0.1
+BASE_BINARY_NAME=partner-charts-ci
+
 cd $(dirname $0)
 
-source ./version
-
-if ls ../bin/charts-build-scripts 1>/dev/null 2>/dev/null; then
-    CURRENT_SCRIPT_VERSION=$(../bin/charts-build-scripts --version | cut -d' ' -f3)
-    if [[ "${CURRENT_SCRIPT_VERSION}" == "${CHARTS_BUILD_SCRIPT_VERSION}" ]]; then
-        exit 0
-    fi
+if [[ -f ../bin/${BASE_BINARY_NAME} ]]; then
+    exit 0
 fi
-
-echo "Pulling in charts-build-scripts version ${CHARTS_BUILD_SCRIPTS_REPO}@${CHARTS_BUILD_SCRIPT_VERSION}"
 
 rm -rf ../bin
 cd ..
@@ -20,27 +16,28 @@ cd ..
 mkdir -p bin
 ARCH=$(go version | cut -d' ' -f4 | cut -d'/' -f1)
 if [[ ${ARCH} == "linux" ]]; then
-    BINARY_NAME=charts-build-scripts
+    BINARY_NAME=${BASE_BINARY_NAME}-${ARCH}-amd64
+elif [[ ${ARCH} == "darwin" ]]; then
+    BINARY_NAME=${BASE_BINARY_NAME}-${ARCH}-universal
 else
-    BINARY_NAME=charts-build-scripts-${ARCH}
+    BINARY_NAME=${BASE_BINARY_NAME}-${ARCH}
 fi
-curl -s -L ${CHARTS_BUILD_SCRIPTS_REPO%.git}/releases/download/${CHARTS_BUILD_SCRIPT_VERSION}/${BINARY_NAME} --output bin/charts-build-scripts
-if ! [[ -f bin/charts-build-scripts ]] || [[ $(cat bin/charts-build-scripts) == "Not Found" ]]; then 
-    rm bin/charts-build-scripts; 
+curl -s -L -o bin/${BASE_BINARY_NAME} https://github.com/samuelattwood/partner-charts-ci/releases/download/${VERSION}/${BINARY_NAME}
+if ! [[ -f bin/${BASE_BINARY_NAME} ]] || [[ $(cat bin/${BASE_BINARY_NAME}) == "Not Found" ]]; then 
+    rm bin/${BASE_BINARY_NAME}
     
     # Fall back to old process
     echo "Building binary locally..."
-    rm -rf charts-build-scripts
-    git clone --depth 1 --branch $CHARTS_BUILD_SCRIPT_VERSION $CHARTS_BUILD_SCRIPTS_REPO 2>/dev/null
+    rm -rf partner-charts-ci
+    git clone --depth 1 https://github.com/samuelattwood/partner-charts-ci.git
 
-    cd charts-build-scripts
-    ./scripts/build
+    cd partner-charts-ci
+    make
     mv bin ..
     cd ..
-    rm -rf charts-build-scripts
+    rm -rf partner-charts-ci
 else
-    echo "${BINARY_NAME} => ./bin/charts-build-scripts"
+    echo "${BINARY_NAME} => ./bin/${BASE_BINARY_NAME}"
 fi
 
-chmod +x ./bin/charts-build-scripts
-./bin/charts-build-scripts --version
+chmod +x ./bin/${BASE_BINARY_NAME}
