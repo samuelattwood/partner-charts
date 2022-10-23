@@ -3829,6 +3829,38 @@ entries:
     urls:
     - assets/k10/k10-4.5.900.tgz
     version: 4.5.900
+  kamaji:
+  - annotations:
+      catalog.cattle.io/certified: partner
+      catalog.cattle.io/display-name: Kamaji - Managed Kubernetes Service
+      catalog.cattle.io/kube-version: 1.21 - 1.25
+      catalog.cattle.io/release-name: kamaji
+    apiVersion: v2
+    appVersion: v0.1.1
+    created: "2022-10-23T16:16:37.546158-04:00"
+    description: Kamaji is a tool aimed to build and operate a Managed Kubernetes
+      Service with a fraction of the operational burden. With Kamaji, you can deploy
+      and operate hundreds of Kubernetes clusters as a hyper-scaler.
+    digest: 6bbe2c36d77193439669200eede8ddd391d79ec1ad15b37ef7ee1203674c614d
+    home: https://github.com/clastix/kamaji
+    icon: https://github.com/clastix/kamaji/raw/master/assets/kamaji-logo.png
+    kubeVersion: 1.21 - 1.25
+    maintainers:
+    - email: dario@tranchitella.eu
+      name: Dario Tranchitella
+    - email: me@maxgio.it
+      name: Massimiliano Giovagnoli
+    - email: me@bsctl.io
+      name: Adriano Pezzuto
+    - email: iam@mendrugory.com
+      name: Gonzalo Gabriel Jiménez Fuentes
+    name: kamaji
+    sources:
+    - https://github.com/clastix/kamaji
+    type: application
+    urls:
+    - assets/clastix/kamaji-0.10.1.tgz
+    version: 0.10.1
   kong:
   - annotations:
       catalog.cattle.io/certified: partner
